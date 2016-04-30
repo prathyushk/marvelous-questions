@@ -1,0 +1,11 @@
+{
+  "name": "marvelous-question",
+  "version": "0.0.1",
+  "scripts": {
+    "start": "node Server.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "express": "latest"
+  }
+}
