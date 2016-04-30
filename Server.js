@@ -46,7 +46,7 @@ app.post('/processq', function(req, res) {
 	    }
 	    else if(resp["intents"][0]["intent"] == "ChICo"){
 		if(resp["entities"].length > 0 && resp["entities"][0].type == "Comic"){
-		    getComic(resp["entities"][0].entity,1,function(comic){
+		    getComic(resp["entities"][0].entity,5,function(comic){
 			    if(comic["title"] != ""){
 				var characters = comic["characters"]["items"];
 				var str = "Some characters that were in " + comic["title"] + ": <br>";
@@ -140,7 +140,7 @@ app.post('/processq', function(req, res) {
 	    }
 	    else if(resp["intents"][0]["intent"] == "CrBCo"){
 		if(resp["entities"].length > 0 && resp["entities"][0].type == "Comic"){
-		    getComic(resp["entities"][0].entity,1,function(comic){
+		    getComic(resp["entities"][0].entity,5,function(comic){
 			    if(comic["title"] != ""){
 				var creators = comic["creators"]["items"];
 				var str = "The creator(s) of " + comic["title"] + ": <br>";
@@ -203,11 +203,13 @@ function getCharacter(name,consideredChars,callback){
 }
 
 function getComic(name,consideredChars,callback){
+    if(name.length < consideredChars)
+        consideredChars = name.length;
     makeMarvelRequest("http://gateway.marvel.com:80/v1/public/comics?titleStartsWith="+name.substr(0,consideredChars)+"&limit=100",function(){
             var comics = JSON.parse(this.responseText)["data"]["results"];
 	    var closest = getClosestComic(name,comics);
-	    if(closest["title"] == "" && consideredChars < name.length-1)
-		getComic(name,consideredChars+1,callback);
+	    if(closest["title"] == "" && consideredChars > 1)
+		getComic(name,consideredChars-1,callback);
 	    else
 		callback(closest);
         });
