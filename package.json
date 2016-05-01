@@ -1,11 +1,16 @@
 {
-  "name": "marvelous-question",
-  "version": "0.0.1",
+  "name": "marvelous-questions",
+  "version": "1.0.0",
   "scripts": {
     "start": "node Server.js"
   },
   "dependencies": {
     "body-parser": "^1.15.0",
-    "express": "latest"
+    "express": "latest",
+    "md5": "^2.1.0",
+    "xmlhttprequest": "^1.8.0"
+  },
+  "engines": {
+    "node": "4.4.3"
   }
 }
