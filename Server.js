@@ -2,7 +2,7 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var distFinder = require("./public/js/levenshtein");
 var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
-var privkey = require("./public/js/privatekey");
+var privkey = System.getenv("PRIV_KEY");
 var md5 = require('md5');
 var app = express();
 var router = express.Router();
@@ -244,7 +244,7 @@ function makeMarvelRequest(url,callback){
     var ts = Date.now();
     if(url.indexOf("?") != -1)
 	url += "&";
-    url += "ts="+ts+"&apikey="+pubkey+"&hash="+md5(ts+privkey.marvelPrivKey+pubkey);
+    url += "ts="+ts+"&apikey="+pubkey+"&hash="+md5(ts+privkey+pubkey);
     xhttp.open("GET",url,true);
     xhttp.send();
 }
