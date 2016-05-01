@@ -148,7 +148,7 @@ app.post('/processq', function(req, res) {
 		    getComic(resp["entities"][0].entity,5,function(comic){
 			    if(comic["title"] != ""){
 				var creators = comic["creators"]["items"];
-				var str = "<div class='row'><div style='padding-right:0;' class='col-md-5'><img style='width:100%;' src='"+comic["thumbnail"]["path"]+"/portrait_medium."+comic["thumbnail"]["extension"]+"'></div><div class='col-md-7'><a href='"+comic["urls"][0]["url"]+"' target='_blank'><h4>"+comic["title"]+"</h4></a>The creator(s): <br>";
+				var str = "<div class='row'><div style='padding-right:0;' class='col-md-5'><img style='width:100%;' src='"+comic["thumbnail"]["path"]+"/portrait_large."+comic["thumbnail"]["extension"]+"'></div><div class='col-md-7'><a href='"+comic["urls"][0]["url"]+"' target='_blank'><h4>"+comic["title"]+"</h4></a>The creator(s): <br>";
 				for(var c=0,l=creators.length;c<l;c++){
 				    str += "<a href='javascript:void(0);' onclick='showCreator("+'"'+creators[c]["name"]+'"'+");'>"+creators[c]["name"] + '</a><br>';
 				}
