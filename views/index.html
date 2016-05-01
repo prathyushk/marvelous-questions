@@ -17,13 +17,67 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     <script type="text/javascript">
+      function showCreator(str){
+      document.getElementById("question").value = "What comics did " +str+" write?";
+      $("#pane").slideUp();
+      var xhttp = new XMLHttpRequest();
+      xhttp.onload = function(){
+      document.getElementById("ans").innerHTML = xhttp.response;
+      }
+      $("#pane").slideDown();
+      document.getElementById("ans").innerHTML = "Loading...";
+      xhttp.open("POST","/processq",true);
+      xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      xhttp.send("question=" + encodeURIComponent("What comics did "+str+ " write"));
+      }
+      function showEvent(str){
+      document.getElementById("question").value = "What happened in " +str+"?";
+      $("#pane").slideUp();
+      var xhttp = new XMLHttpRequest();
+      xhttp.onload = function(){
+      document.getElementById("ans").innerHTML = xhttp.response;
+      }
+      $("#pane").slideDown();
+      document.getElementById("ans").innerHTML = "Loading...";
+      xhttp.open("POST","/processq",true);
+      xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      xhttp.send("question=" + encodeURIComponent("What happened in "+str));
+      }
+      function showCharacter(str){
+      document.getElementById("question").value = "Who is " +str+"?";
+      $("#pane").slideUp();
+      var xhttp = new XMLHttpRequest();
+      xhttp.onload = function(){
+      document.getElementById("ans").innerHTML = xhttp.response;
+
+      }
+      $("#pane").slideDown();
+      document.getElementById("ans").innerHTML = "Loading...";
+      xhttp.open("POST","/processq",true);
+      xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      xhttp.send("question=" + encodeURIComponent("Who is "+str));
+      }
+      function showComic(str){
+      document.getElementById("question").value = "Who wrote " +str+"?";
+      $("#pane").slideUp();
+      var xhttp = new XMLHttpRequest();
+      xhttp.onload = function(){
+      document.getElementById("ans").innerHTML = xhttp.response;
+      }
+      $("#pane").slideDown();
+      document.getElementById("ans").innerHTML = "Loading...";
+      xhttp.open("POST","/processq",true);
+      xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      xhttp.send("question=" + encodeURIComponent("Who wrote "+str));
+      }
       function handleClick(){
       $("#pane").slideUp();
       var xhttp = new XMLHttpRequest();
       xhttp.onload = function(){
       document.getElementById("ans").innerHTML = xhttp.response;
-      $("#pane").slideDown();
       }
+      $("#pane").slideDown();
+      document.getElementById("ans").innerHTML = "Loading...";
       xhttp.open("POST","/processq",true);
       xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
       xhttp.send("question="+encodeURIComponent(document.getElementById("question").value));
@@ -31,14 +85,14 @@
     </script>
   </head>
   <body>
-    <div id="main">
-      <center><h1 style="color: rgb(255,255,255);" >Ask Me a Question About Marvel</h1></center>
+    <div id="main" style="min-width:50%;max-width:50%;">
+      <center><h1 style="width:100%;border:solid;padding-left:5px;padding-top:7px;padding-bottom:10px;padding-right:5px;color: rgb(255,255,255);" >Ask Me a Question About Marvel</h1></center><br>
       <form action="javascript:handleClick()"
 action="/processq" method="post">
-	<input style="word-spacing:3px;" type="text" id="question" class="form-control" name="question">
+	<input style="padding:10px;width:100%;border-radius:80px;border:3pt solid black;" type="text" id="question"  name="question">
       </form>
       <br>
-      <div style="overflow-y:scroll;width:100%;display:none;" id="pane" class="panel panel-default">
+      <div style="max-width:initial;border: 3pt solid black; width:100%;display: block; overflow-y: scroll;display:none;" id="pane" class="panel panel-default">
 	<div class="panel-body" id="ans">
 	</div>
       </div>
@@ -47,6 +101,21 @@ action="/processq" method="post">
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>
+      $(document).ready(function()
+      {
+      setInterval(function() {
+      var e = $('#main');
+      var positionTop = e.position().top; 
+      if(positionTop<=0) {
+      e.offset({top:0});
+      }
+      else {
+      e.css('top', "50%");
+			 }
+			 },50);
+			 });
+    </script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="static/js/bootstrap.min.js"></script>
   </body>

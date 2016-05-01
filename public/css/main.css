@@ -9,6 +9,10 @@ body {
     font-family: Bebas;
     src: url('/static/fonts/bebas.ttf');
 }
+@font-face{
+    font-family: Comic;
+    src: url('/static/fonts/comic.ttf');
+}
 #main {
   font-family: Bebas;
   position:absolute;
@@ -19,3 +23,14 @@ body {
   -webkit-transform: translate(-50%,-50%);
   transform: translate(-50%,-50%);
 }   
+#ans{
+    font-family: Comic;
+}
+input{
+    font-family:Comic;
+    font-size:1.5em;
+}
+*:focus {
+    outline: none;
+    box-shadow: 0 0 0 4pt black;
+}
